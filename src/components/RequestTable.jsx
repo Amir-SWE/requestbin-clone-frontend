@@ -12,7 +12,9 @@ export default function RequestTable({records}) {
     noHeader
     withTableBorder
     highlightOnHover
-    verticalSpacing="md"
+    verticalSpacing='lg'
+    horizontalSpacing='md'
+    fz='md'
     columns={[
         { 
             accessor: 'timestamp',

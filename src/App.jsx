@@ -1,6 +1,7 @@
-import { MantineProvider, Container, Center, createTheme } from '@mantine/core'
+import { MantineProvider, Container, createTheme } from '@mantine/core'
 import RequestTable from './components/RequestTable'
 import Endpoint from './components/EndPoint'
+import Title from './components/Title'
 
 import '@mantine/core/styles.layer.css';
 import 'mantine-datatable/styles.layer.css';
@@ -15,9 +16,7 @@ const theme = createTheme({
 function App() {
     return (
         <MantineProvider defaultColorScheme='dark' theme={theme}>
-            <Container style={{paddingBottom:'80px'}}>
-                <Center><h1>Request Bin</h1></Center>
-            </Container>
+            <Title title='REQUEST BIN'/>
             <Endpoint url={endpoint}/>
             <Container style={{paddingTop:'30px'}}>
                 <RequestTable records={requests}/>

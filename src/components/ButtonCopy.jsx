@@ -15,6 +15,7 @@ export function ButtonCopy() {
     >
       <Button
         variant="light"
+        color='#9ae2ff'
         rightSection={
           clipboard.copied ? (
             <IconCheck style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
