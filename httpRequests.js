@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const MAIN_URL = "http://localhost:3001";
+const MAIN_URL = import.meta.env.VITE_BACKEND_URL
 
 const getAllEvents = (bin_key) => {
   const url = `${MAIN_URL}/view/${bin_key}`;
@@ -19,10 +19,16 @@ const create = () => {
 };
 
 const deleteEvent = (eventId) => {
-  //delete/:eventId
   const url = `${MAIN_URL}/delete/${eventId}`;
   const request = axios.delete(url);
   return request.then((response) => response.data);
 };
 
-export { create, getAllEvents, deleteEvent };
+const testRequests = (bin_key) => {
+  const url = `${MAIN_URL}/${bin_key}`;
+
+  const get = axios.get(url + "/sample/get");
+  const post = axios.post(url + "/sample/post", { "epochtime": Date.now() });
+}
+
+export { create, getAllEvents, deleteEvent, testRequests };
