@@ -5,8 +5,36 @@ import { DataTable } from "mantine-datatable";
 import classes from "./RequestTable.module.css";
 import { IconTrash } from "@tabler/icons-react";
 import { deleteEvent } from "../../httpRequests";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAllEvents, create } from "../../httpRequests";
+
+
 
 export default function RequestTable({ records, changeEvent }) {
+  const { binKey } = useParams()
+
+  useEffect(() => {
+    let intervalId;
+  
+    async function fetchData() {
+      try {
+        const events = await getAllEvents(binKey);
+        changeEvent(events);
+      } catch (error) {
+        console.error("Error with fetching data:", error);
+      }
+    }
+  
+    fetchData(); // Immediately fetch data on binKey change
+  
+    intervalId = setInterval(() => {
+      fetchData();
+    }, 500);
+  
+    return () => clearInterval(intervalId); // Clean up the interval on component unmount or binKey change
+  }, [binKey]);
+
   return (
     <DataTable
       minHeight={150}
